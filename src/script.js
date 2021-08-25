@@ -64,6 +64,16 @@ const preencherDados = (dados) => {
   }, [])
 }
 
+const placeHolder = document.getElementById('placeholder');
+placeHolder.addEventListener('click', (target) => {
+  showThisData(myDados.find((ele) => ele.Province === target.id))
+  //alterar target.id para como vamos identificar o estado ao ele receber o click
+});
+
+const showThisData = (provinceObj) => {
+  const newElement = document.createElement('span');
+}
+
 async function getDataVaccine() {
   let requestOptions = {
     method: 'GET',
@@ -73,7 +83,6 @@ async function getDataVaccine() {
   const myDados = fetch("https://api.covid19api.com/live/country/brazil/status/confirmed/date/2021-08-24T13:13:30Z", requestOptions)
     .then(response => response.json())
     .then((object) => preencherDados(object))
-    .then(result => console.log(result))
     .catch(error => console.log('error', error));
 
 

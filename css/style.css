@@ -4,7 +4,7 @@
 }
 
 body {
-  background-color: black;
+  /* background-color: black !important; */
   background-position: center;
   background-size: cover;
   height: 100vh;
@@ -31,4 +31,20 @@ body {
   height: 70vh;
   margin: auto;
   display: none;
+}
+
+#regions_div , #defs{
+  fill: none !important;
+}
+
+rect {
+  fill: none !important;
+}
+
+path {
+  fill: rgba(223, 214, 214, 0.1);
+}
+
+path:hover {
+  fill: rgb(38, 78, 1);
 }
