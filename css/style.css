@@ -4,17 +4,33 @@
 }
 
 body {
-  background-image: url('yoda.jpg');
+  background-color: black;
   background-position: center;
   background-size: cover;
   height: 100vh;
   color: white;
   font-family: 'Roboto Mono', monospace;
+  display: flex;
+  /* flex-direction: column; */
 }
 
 #message {
-  padding-top: 20px;
-  font-size: 2em;
-
+  padding-top: 150px;
+  height: 100%;
+  font-size: 3em;
   text-align: center;
+  margin:auto;
+  justify-content: center;
+  align-items: center;
+  justify-self: center;
+  align-content: center;
+}
+
+#showme {
+  margin-top: 50px;
+  width: 80%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  margin: auto;
+  display: none;
 }

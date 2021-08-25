@@ -1,17 +1,3 @@
-// const fetch = require('node-fetch');
-// async function getDataVaccine() {
-//   let requestOptions = {
-//     method: 'GET',
-//     redirect: 'follow'
-//   };
-
-//   fetch("https://api.covid19api.com/live/country/brazil/status/confirmed/date/2021-08-24T13:13:30Z", requestOptions)
-//     .then(response => response.json())
-//     .then(result => console.log(result))
-//     .catch(error => console.log('error', error));
-// }
-// getDataVaccine();
-
 let quoteArray = [];
 let index = 0; 
 let textPosition = 0; 
@@ -41,3 +27,33 @@ typewriter = () => {
   }   
 }
 window.addEventListener('load', typewriter);
+
+
+const showme = document.getElementById('showme');
+const message = document.getElementById('message');
+function showAll() {
+  setTimeout(function(){ 
+    showme.innerText = 'teste';
+    showme.style.display = 'block';
+    message.style.fontSize = '1.5em';
+    message.style.paddingTop = '50px';
+  }, 2000);
+}
+
+window.onload = () => {
+  showAll();
+}
+
+// const fetch = require('node-fetch');
+// async function getDataVaccine() {
+//   let requestOptions = {
+//     method: 'GET',
+//     redirect: 'follow'
+//   };
+
+//   fetch("https://api.covid19api.com/live/country/brazil/status/confirmed/date/2021-08-24T13:13:30Z", requestOptions)
+//     .then(response => response.json())
+//     .then(result => console.log(result))
+//     .catch(error => console.log('error', error));
+// }
+// getDataVaccine();
