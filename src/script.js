@@ -64,14 +64,16 @@ const preencherDados = (dados) => {
   }, [])
 }
 
-const placeHolder = document.getElementById('placeholder');
-placeHolder.addEventListener('click', (target) => {
-  showThisData(myDados.find((ele) => ele.Province === target.id))
-  //alterar target.id para como vamos identificar o estado ao ele receber o click
-});
+// const placeHolder = document.getElementById('placeholder');
+// placeHolder.addEventListener('click', (target) => {
+//   showThisData(myDados.find((ele) => ele.Province === target.id))
+//   //alterar target.id para como vamos identificar o estado ao ele receber o click
+// });
 
 const showThisData = (provinceObj) => {
   const newElement = document.createElement('span');
+  newElement.innerHTML = `Nº de casos: ${provinceObj.casos}
+  Nº de mortes: ${provinceObj.mortes}`;
 }
 
 async function getDataVaccine() {
