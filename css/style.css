@@ -42,7 +42,7 @@ rect {
 }
 
 path {
-  /* fill: rgba(223, 214, 214, 0.1); */
+  fill: rgba(223, 214, 214, 0.1);
 }
 
 path:hover {

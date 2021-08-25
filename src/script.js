@@ -47,9 +47,6 @@ function showAll() {
   }, 3000);
 }
 
-window.onload = () => {
-  showAll();
-}
 const myData = [];
 
 const preencherDados = (dados) => {
@@ -93,4 +90,9 @@ async function getDataVaccine() {
     //   casos: Confirmed,
     // }
 }
-getDataVaccine();
+
+
+window.onload = () => {
+  showAll();
+  getDataVaccine();
+}
