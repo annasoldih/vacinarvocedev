@@ -4,7 +4,7 @@
 }
 
 body {
-  /* background-color: black !important; */
+  background-color: black;
   background-position: center;
   background-size: cover;
   height: 100vh;
@@ -42,7 +42,7 @@ rect {
 }
 
 path {
-  fill: rgba(223, 214, 214, 0.1);
+  fill: rgba(0, 0, 0, 0.1);
 }
 
 path:hover {
