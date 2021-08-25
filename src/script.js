@@ -24,7 +24,10 @@ typewriter = () => {
     setTimeout("typewriter()", 4000);
     textPosition = 0;
     flag = true;
-  }   
+ }
+ setTimeout(function(){ 
+  // showme.innerText = 'teste';
+}, 4000);
 }
 window.addEventListener('load', typewriter);
 
@@ -33,27 +36,50 @@ const showme = document.getElementById('showme');
 const message = document.getElementById('message');
 function showAll() {
   setTimeout(function(){ 
-    showme.innerText = 'teste';
     showme.style.display = 'block';
+    message.style.height = '10%';
     message.style.fontSize = '1.5em';
     message.style.paddingTop = '50px';
-  }, 2000);
+    message.style.alignItems = 'flex-start';
+    message.style.position = 'absolute';
+    message.style.alignSelf = 'center';    
+    document.body.style.backgroundImage = "url('yoda.jpg')";
+  }, 3000);
 }
 
 window.onload = () => {
   showAll();
 }
+const myData = [];
 
-// const fetch = require('node-fetch');
-// async function getDataVaccine() {
-//   let requestOptions = {
-//     method: 'GET',
-//     redirect: 'follow'
-//   };
+const preencherDados = (dados) => {
+  dados.reduce((acc, dado) => {
+    acc.push({
+      [`${dado.Province}`]: {
+        casos: dado.Confirmed,
+        mortes: dado.Deaths,
+      }
+    })
+    return acc;
+  }, [])
+}
 
-//   fetch("https://api.covid19api.com/live/country/brazil/status/confirmed/date/2021-08-24T13:13:30Z", requestOptions)
-//     .then(response => response.json())
-//     .then(result => console.log(result))
-//     .catch(error => console.log('error', error));
-// }
-// getDataVaccine();
+async function getDataVaccine() {
+  let requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+
+  const myDados = fetch("https://api.covid19api.com/live/country/brazil/status/confirmed/date/2021-08-24T13:13:30Z", requestOptions)
+    .then(response => response.json())
+    .then((object) => preencherDados(object))
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+
+
+    // province: {
+    //   mortes: Deaths,
+    //   casos: Confirmed,
+    // }
+}
+getDataVaccine();
