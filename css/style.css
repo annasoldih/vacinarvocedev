@@ -4,9 +4,10 @@
 }
 
 body {
-  background-color: black;
-  background-position: center;
-  background-size: cover;
+  background-color: rgba(1,1,1,255);
+  background-position: right;
+  background-repeat: no-repeat; 
+  /* background-size: cover; */
   height: 100vh;
   color: white;
   font-family: 'Roboto Mono', monospace;
@@ -42,9 +43,13 @@ rect {
 }
 
 path {
-  fill: rgba(0, 0, 0, 0.1);
+  /* fill: rgba(0, 0, 0, 0.1); */
 }
 
 path:hover {
-  fill: rgb(38, 78, 1);
+  fill: rgb(9, 19, 0);
+}
+
+#seletorCombo{
+  background-color: black;
 }
