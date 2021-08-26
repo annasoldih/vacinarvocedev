@@ -1,3 +1,6 @@
+/* font-family: 'Cairo', sans-serif;
+font-family: 'Open Sans', sans-serif; */
+
 * {
   margin: 0;
   padding: 0;
@@ -7,10 +10,9 @@ body {
   background-color: rgba(1,1,1,255);
   background-position: right;
   background-repeat: no-repeat; 
-  /* background-size: cover; */
   height: 100vh;
   color: white;
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'Open Sans', sans-serif;
   display: flex;
   flex-direction: column;
 }
@@ -18,33 +20,22 @@ body {
 #message {
   display: flex;
   margin: auto;
-  padding-bottom: 200px;
   height: 100%;
   font-size: 4em;
   align-items: center;
-  /* background-color: beige; */
+  font-family: 'Cairo', sans-serif;
+  font-weight: 800;
 }
 
 #showme {
-  margin-top: 200px;
+  margin-top: 50px;
   padding: 20px 0px;
   background-color: rgba(0, 0, 0, 0.8);
   width: 80%;
-  height: 70vh;
+  min-width: 650px;
+  height: 80vh;
   margin: auto;
-  display: none;
-}
-
-#regions_div , #defs{
-  fill: none !important;
-}
-
-rect {
-  fill: none !important;
-}
-
-#seletorCombo{
-  background-color: black;
+  flex-direction: row;
   display: none;
 }
 
@@ -75,8 +66,8 @@ rect {
 .infoApi{
   text-align: justify;
   margin: 15px;
-  padding: 25px;
-  height: fit-content;
+  margin-top: 130px;
+  padding: 15px;
   background-color: rgb(255, 255, 255, 0.05);
 }
 
@@ -92,3 +83,42 @@ rect {
   text-align: center;
 }
 
+#brmap, #svgbrmap{
+  display: flex;
+  justify-content: left;
+}
+
+
+.gocol30 {
+  width: 30%;
+}
+
+.gocol70 {
+  width: 65%;
+}
+
+.gorow{
+  display: flex;
+  flex-direction: row;
+}
+
+.margin {
+line-height: 60px;
+}
+
+@media (max-width: 1200px) {
+
+  #showme{
+    display: flex;
+    flex-direction: column !important;
+  }
+
+  .gocol {
+    flex-direction: column !important;
+  }
+
+  .gocol100 {
+    width: 100%;
+    flex-direction: column;
+  }
+}

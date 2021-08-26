@@ -25,9 +25,7 @@ typewriter = () => {
     textPosition = 0;
     flag = true;
   }
-  setTimeout(function () {
-    // showme.innerText = 'teste';
-  }, 4000);
+
 }
 window.addEventListener('load', typewriter);
 
@@ -36,10 +34,12 @@ const showme = document.getElementById('showme');
 const message = document.getElementById('message');
 function showAll() {
   setTimeout(function () {
-    showme.style.display = 'block';
+    showme.style.display = 'flex';
+    showme.style.flexDirection = 'row';
     message.style.height = '10%';
     message.style.fontSize = '1.5em';
-    message.style.paddingTop = '50px';
+    message.style.paddingTop = '30px';
+    message.style.marginBottom = '50px';
     message.style.alignItems = 'flex-start';
     message.style.position = 'absolute';
     message.style.alignSelf = 'center';
