@@ -44,7 +44,7 @@ function showAll() {
     message.style.position = 'absolute';
     message.style.alignSelf = 'center';
     document.body.style.backgroundImage = "url('yoda-right.jpg')";
-  }, 10);
+  }, 4000);
 }
 
 
@@ -53,6 +53,8 @@ const myData = [];
 
 let mortesBR = 0;
 let casosBR = 0;
+// let mortesTT = 0;
+// let casosTT = 0;
 async function getDataVaccine() {
   let requestOptions = {
     method: 'GET',
@@ -65,11 +67,18 @@ async function getDataVaccine() {
     mortesBR += element.Deaths;
     casosBR += element.Confirmed;
   });
-  console.log(myData);
   mortesBR = parseInt(mortesBR).toLocaleString();
   casosBR = parseInt(casosBR).toLocaleString();
 
-  resp.innerText = `No Brasil, até a presente data, temos ${casosBR} casos confirmados da Covid-19, e somamos ${mortesBR} óbitos pela doença.`
+  const totalData = await fetch('https://api.covid19api.com/world/total', requestOptions);
+  const myTotal = await totalData.json();
+  mortesTT = myTotal.TotalDeaths;
+  casosTT = myTotal.TotalConfirmed;
+  mortesTT = parseInt(mortesTT).toLocaleString();
+  casosTT = parseInt(casosTT).toLocaleString();
+  resp.innerText = `No Brasil, até a presente data, temos ${casosBR} casos confirmados da Covid-19, e somamos ${mortesBR} óbitos pela doença.
+  
+  No mundo inteiro, somam-se ${casosTT} casos e ${mortesTT} mortes.`;
 }
 
 function getMe(clicked_id) {
