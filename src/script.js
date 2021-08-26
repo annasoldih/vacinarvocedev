@@ -60,7 +60,16 @@ async function getDataVaccine() {
     method: 'GET',
     redirect: 'follow'
   };
-  const myDados = await fetch("https://api.covid19api.com/live/country/brazil/status/confirmed/date/2021-08-24T13:13:30Z", requestOptions)
+
+  let today = new Date();
+  let yesterday = new Date();
+  yesterday.setDate(today.getDate() - 1);
+  let dd = String(yesterday.getDate()).padStart(2, '0');
+  let mm = String(yesterday.getMonth() + 1).padStart(2, '0');
+  let yyyy = yesterday.getFullYear();
+  yesterday = `${yyyy}-${mm}-${dd}`;
+
+  const myDados = await fetch(`https://api.covid19api.com/live/country/brazil/status/confirmed/date/${yesterday}T13:13:30Z`, requestOptions)
   const myInfo = await myDados.json();
   myInfo.forEach(element => {
     myData[element.Province] = { state: element.Province, casos: element.Confirmed, mortes: element.Deaths };
