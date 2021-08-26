@@ -1,3 +1,16 @@
+const myIP = document.getElementById('myIP').innerText;
+let myRegion = document.getElementById('myRegion').innerText;
+const myCity = document.getElementById('myCity').innerText;
+const myCountry = document.getElementById('myCountry').innerText;
+
+
+myRegion = myRegion.replace(/á/g, "a");
+myRegion = myRegion.replace(/ã/g, "a");
+myRegion = myRegion.replace(/é/g, "e");
+myRegion = myRegion.replace(/í/g, "i");
+myRegion = myRegion.replace(/ô/g, "o");
+myRegion = myRegion.replace(/ú/g, "u");
+
 let quoteArray = [];
 let index = 0;
 let textPosition = 0;
@@ -98,13 +111,18 @@ async function getDataVaccine() {
   resp.innerText = `No Brasil, até a presente data, temos ${casosBR} casos confirmados da Covid-19, e somamos ${mortesBR} óbitos pela doença. Atualmente temos ${ativosBR} casos ativos.
   
   No mundo inteiro, somam-se ${casosTT} casos e ${mortesTT} mortes. Nas últimas 24 horas, foram reportados ${newCases} novos casos, e ${newDeaths} mortes.`;
+
+  selectedState.innerText = myRegion;
+  selectedState.style.display = 'flex';
+  selectedStateInfo.style.display = 'flex';
+  selectedStateInfo.innerText = loadMyState(myRegion);
+
 }
 
 function getMe(clicked_id) {
   if (document.getElementById(clicked_id).classList.contains('in-br')) {
     selectedState.innerText = clicked_id;
     selectedState.style.display = 'flex';
-    selectedStateInfo.style.display = 'flex';
     selectedStateInfo.style.display = 'flex';
     selectedStateInfo.innerText = getState(clicked_id);
   } else {
@@ -116,6 +134,16 @@ function getMe(clicked_id) {
 function getState(state) {
   return `Nesse Estado, o número de casos é de ${parseInt(myData[state].casos).toLocaleString()} e o número de fatalidades é de ${parseInt(myData[state].mortes).toLocaleString()}.`;
 }
+
+
+function loadMyState(state){
+
+  console.log(myIP);
+  return `Vi aqui que seu IP é ${myIP}, e você está aqui: ${myCountry}, ${myRegion}, ${myCity}. Vou te mostrar os dados para sua região, ok?
+  Na região (${myRegion}) o número de casos é de ${parseInt(myData[state].casos).toLocaleString()} e o número de fatalidades é de ${parseInt(myData[state].mortes).toLocaleString()}.
+  `;
+}
+
 
 window.onload = () => {
   showAll();
