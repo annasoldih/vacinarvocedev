@@ -94,6 +94,7 @@ async function getDataVaccine() {
   newCases = parseInt(newCases).toLocaleString();
   newDeaths = parseInt(newDeaths).toLocaleString();
 
+
   resp.innerText = `No Brasil, até a presente data, temos ${casosBR} casos confirmados da Covid-19, e somamos ${mortesBR} óbitos pela doença. Atualmente temos ${ativosBR} casos ativos.
   
   No mundo inteiro, somam-se ${casosTT} casos e ${mortesTT} mortes. Nas últimas 24 horas, foram reportados ${newCases} novos casos, e ${newDeaths} mortes.`;
