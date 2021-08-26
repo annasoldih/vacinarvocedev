@@ -105,12 +105,13 @@ body {
 
 .margin {
 line-height: 60px;
+padding: 20px;
 }
 
 @media (max-width: 1200px) {
 
   #showme{
-    display: flex;
+    /* display: flex; */
     flex-direction: column !important;
   }
 
