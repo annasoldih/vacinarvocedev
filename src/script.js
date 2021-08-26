@@ -47,14 +47,16 @@ function showAll() {
   }, 4000);
 }
 
-
 const resp = document.getElementById('dadosApi');
 const myData = [];
-
 let mortesBR = 0;
 let casosBR = 0;
-// let mortesTT = 0;
-// let casosTT = 0;
+let ativosBR = 0;
+let mortesTT = 0;
+let casosTT = 0;
+let newDeaths = 0;
+let newCases = 0;
+
 async function getDataVaccine() {
   let requestOptions = {
     method: 'GET',
@@ -72,22 +74,29 @@ async function getDataVaccine() {
   const myDados = await fetch(`https://api.covid19api.com/live/country/brazil/status/confirmed/date/${yesterday}T13:13:30Z`, requestOptions)
   const myInfo = await myDados.json();
   myInfo.forEach(element => {
-    myData[element.Province] = { state: element.Province, casos: element.Confirmed, mortes: element.Deaths };
+    myData[element.Province] = { state: element.Province, casos: element.Confirmed, mortes: element.Deaths, ativos: element.Active };
     mortesBR += element.Deaths;
     casosBR += element.Confirmed;
+    ativosBR += element.Active;
   });
   mortesBR = parseInt(mortesBR).toLocaleString();
   casosBR = parseInt(casosBR).toLocaleString();
+  ativosBR = parseInt(ativosBR).toLocaleString();
 
-  const totalData = await fetch('https://api.covid19api.com/world/total', requestOptions);
-  const myTotal = await totalData.json();
-  mortesTT = myTotal.TotalDeaths;
-  casosTT = myTotal.TotalConfirmed;
+  const globalData = await fetch('https://api.covid19api.com/summary', requestOptions);
+  const myGlobal = await globalData.json();
+  mortesTT = myGlobal.Global.TotalDeaths;
+  casosTT = myGlobal.Global.TotalConfirmed;
+  newCases = myGlobal.Global.NewConfirmed;
+  newDeaths = myGlobal.Global.NewDeaths;
   mortesTT = parseInt(mortesTT).toLocaleString();
   casosTT = parseInt(casosTT).toLocaleString();
-  resp.innerText = `No Brasil, até a presente data, temos ${casosBR} casos confirmados da Covid-19, e somamos ${mortesBR} óbitos pela doença.
+  newCases = parseInt(newCases).toLocaleString();
+  newDeaths = parseInt(newDeaths).toLocaleString();
+
+  resp.innerText = `No Brasil, até a presente data, temos ${casosBR} casos confirmados da Covid-19, e somamos ${mortesBR} óbitos pela doença. Atualmente temos ${ativosBR} casos ativos.
   
-  No mundo inteiro, somam-se ${casosTT} casos e ${mortesTT} mortes.`;
+  No mundo inteiro, somam-se ${casosTT} casos e ${mortesTT} mortes. Nas últimas 24 horas, foram reportados ${newCases} novos casos, e ${newDeaths} mortes.`;
 }
 
 function getMe(clicked_id) {
@@ -104,7 +113,7 @@ function getMe(clicked_id) {
 }
 
 function getState(state) {
-  return `Nesse Estado, o número de casos é de ${parseInt(myData[state].casos).toLocaleString()} e o número de fatalidades é de ${parseInt(myData[state].mortes).toLocaleString()}`;
+  return `Nesse Estado, o número de casos é de ${parseInt(myData[state].casos).toLocaleString()} e o número de fatalidades é de ${parseInt(myData[state].mortes).toLocaleString()}.`;
 }
 
 window.onload = () => {
