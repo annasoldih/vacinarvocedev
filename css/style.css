@@ -27,6 +27,7 @@ body {
 
 #showme {
   margin-top: 200px;
+  padding: 20px 0px;
   background-color: rgba(0, 0, 0, 0.8);
   width: 80%;
   height: 70vh;
@@ -42,14 +43,52 @@ rect {
   fill: none !important;
 }
 
-path {
-  /* fill: rgba(0, 0, 0, 0.1); */
-}
-
-path:hover {
-  fill: rgb(9, 19, 0);
-}
-
 #seletorCombo{
   background-color: black;
+  display: none;
 }
+
+.off-br{
+  border: 0.5px solid rgb(54, 54, 54);
+  fill: rgba(0, 0, 0, 0.1);
+}
+
+.off-br:hover{
+  fill: rgba(255, 255, 255, 0.1);
+}
+
+.in-br:hover{
+  fill: rgba(21, 255, 0, 0.5);
+}
+
+.in-br{
+  fill: rgba(0, 0, 0, 0.6);
+  border: 0.5px solid rgb(255, 255, 255);
+
+}
+
+.off-all{
+  background-color: rgba(129, 13, 13, 0.9);
+  display: none;
+
+}
+.infoApi{
+  text-align: justify;
+  margin: 15px;
+  padding: 25px;
+  height: fit-content;
+  background-color: rgb(255, 255, 255, 0.05);
+}
+
+#selectedState, #selectedStateInfo{
+  margin-top: 30px;
+  display: none;
+  flex-direction: column;
+}
+
+#selectedState{
+  font-weight: 700;
+  font-size: 1.5em;
+  text-align: center;
+}
+

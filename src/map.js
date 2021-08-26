@@ -3,6 +3,101 @@
 google.charts.load('current', {'packages':['geochart']});
 google.charts.setOnLoadCallback(drawRegionsMap);
 
+
+
+let quoteArray = [];
+let index = 0; 
+let textPosition = 0; 
+let flag = true;
+
+loadQuote = () => {  
+  quoteArray[index] = 'Vacinar-se você DEV';
+}
+
+typewriter = () => {
+  if(flag){
+    loadQuote();
+    quoteArray[index] += ""; 
+    flag = false;
+  }
+
+  document.querySelector("#message").innerHTML = quoteArray[index].substring(0, textPosition) + '<span>\u25AE</span>';
+
+  if(textPosition++ != quoteArray[index].length){
+    setTimeout("typewriter()", 100);
+  }
+  else{
+    quoteArray[index] = ' ';
+    setTimeout("typewriter()", 4000);
+    textPosition = 0;
+    flag = true;
+ }
+ setTimeout(function(){ 
+  // showme.innerText = 'teste';
+}, 4000);
+}
+window.addEventListener('load', typewriter);
+
+
+const showme = document.getElementById('showme');
+const message = document.getElementById('message');
+function showAll() {
+  setTimeout(function(){ 
+    showme.style.display = 'block';
+    message.style.height = '10%';
+    message.style.fontSize = '1.5em';
+    message.style.paddingTop = '50px';
+    message.style.alignItems = 'flex-start';
+    message.style.position = 'absolute';
+    message.style.alignSelf = 'center';    
+    document.body.style.backgroundImage = "url('yoda-right.jpg')";
+  }, 3000);
+}
+
+// const placeHolder = document.getElementById('placeholder');
+// placeHolder.addEventListener('click', (target) => {
+//   showThisData(myDados.find((ele) => ele.Province === target.id))
+//   //alterar target.id para como vamos identificar o estado ao ele receber o click
+// });
+
+
+const myData = {};
+
+const preencherDados = (dados) => {
+  dados.reduce((acc, dado) => {
+    acc.push({
+      [`${dado.Province}`]: {
+        casos: dado.Confirmed,
+        mortes: dado.Deaths,
+      }
+    })
+    return acc;
+  }, [])
+}
+
+
+
+
+const showThisData = (provinceObj) => {
+  const newElement = document.createElement('span');
+  newElement.innerHTML = `Nº de casos: ${provinceObj.casos}
+  Nº de mortes: ${provinceObj.mortes}`;
+}
+
+async function getDataVaccine() {
+  let requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+
+  const myDados = fetch("https://api.covid19api.com/live/country/brazil/status/confirmed/date/2021-08-24T13:13:30Z", requestOptions)
+    .then(response => response.json())
+    .then((object) => preencherDados(object))
+    .catch(error => console.log('error', error));
+}
+
+console.log(preencherDados);
+
 dicEstados = {
     '1' : 'Acre',
     '2' : 'Alagoas',
@@ -134,6 +229,10 @@ function drawRegionsMap() {
     ['Tocantins']
   ]);
 
+  
+  
+
+
   var options = {
      region: 'BR',
      resolution: 'provinces',
@@ -162,12 +261,12 @@ function drawRegionsMap() {
     }else{
         ultimoEstadoSelecionado = message;
     }
-      document.getElementById("dadosLojas").innerHTML = '';
+      document.getElementById("dadosApi").innerHTML = '';
       for(var i = 0; i < Object.keys(unidades).length; i ++){ 
         document.getElementById("estado").innerHTML = dicEstados[message];
         //Ponto de melhoria, percorrer o array apenas nos itens relacionados ao estado clicado/marcado. (lazy)
         if(unidades[dicEstados[message]][i] != undefined){
-          document.getElementById("dadosLojas").innerHTML += 
+          document.getElementById("dadosApi").innerHTML += 
           '<br>Unidade: ' + 
           unidades[dicEstados[message]][i]['Loja'] + 
           '<br>Fone: ' + 
@@ -206,10 +305,10 @@ function drawRegionsMap() {
             message = 'nothing';
             return false;
         }
-          document.getElementById("dadosLojas").innerHTML = '';
+          document.getElementById("dadosApi").innerHTML = '';
           for(var i = 0; i < Object.keys(unidades).length;  i ++){ 
             document.getElementById("estado").innerHTML = dicEstados[message];
-            document.getElementById("dadosLojas").innerHTML += 
+            document.getElementById("dadosApi").innerHTML += 
             '<br>Unidade: ' + 
             unidades[dicEstados[message]][i]['Loja'] + 
             '<br>Fone: ' + 
@@ -234,94 +333,6 @@ function clean() {
 }
 clean();
 
-
-
-let quoteArray = [];
-let index = 0; 
-let textPosition = 0; 
-let flag = true;
-
-loadQuote = () => {  
-  quoteArray[index] = 'Vacinar-se você DEV';
-}
-
-typewriter = () => {
-  if(flag){
-    loadQuote();
-    quoteArray[index] += ""; 
-    flag = false;
-  }
-
-  document.querySelector("#message").innerHTML = quoteArray[index].substring(0, textPosition) + '<span>\u25AE</span>';
-
-  if(textPosition++ != quoteArray[index].length){
-    setTimeout("typewriter()", 100);
-  }
-  else{
-    quoteArray[index] = ' ';
-    setTimeout("typewriter()", 4000);
-    textPosition = 0;
-    flag = true;
- }
- setTimeout(function(){ 
-  // showme.innerText = 'teste';
-}, 4000);
-}
-window.addEventListener('load', typewriter);
-
-
-const showme = document.getElementById('showme');
-const message = document.getElementById('message');
-function showAll() {
-  setTimeout(function(){ 
-    showme.style.display = 'block';
-    message.style.height = '10%';
-    message.style.fontSize = '1.5em';
-    message.style.paddingTop = '50px';
-    message.style.alignItems = 'flex-start';
-    message.style.position = 'absolute';
-    message.style.alignSelf = 'center';    
-    document.body.style.backgroundImage = "url('yoda-right.jpg')";
-  }, 3000);
-}
-
-const myData = {};
-
-const preencherDados = (dados) => {
-  dados.reduce((acc, dado) => {
-    acc.push({
-      [`${dado.Province}`]: {
-        casos: dado.Confirmed,
-        mortes: dado.Deaths,
-      }
-    })
-    return acc;
-  }, [])
-}
-
-// const placeHolder = document.getElementById('placeholder');
-// placeHolder.addEventListener('click', (target) => {
-//   showThisData(myDados.find((ele) => ele.Province === target.id))
-//   //alterar target.id para como vamos identificar o estado ao ele receber o click
-// });
-
-const showThisData = (provinceObj) => {
-  const newElement = document.createElement('span');
-  newElement.innerHTML = `Nº de casos: ${provinceObj.casos}
-  Nº de mortes: ${provinceObj.mortes}`;
-}
-
-async function getDataVaccine() {
-  let requestOptions = {
-    method: 'GET',
-    redirect: 'follow'
-  };
-
-  const myDados = fetch("https://api.covid19api.com/live/country/brazil/status/confirmed/date/2021-08-24T13:13:30Z", requestOptions)
-    .then(response => response.json())
-    .then((object) => preencherDados(object))
-    .catch(error => console.log('error', error));
-}
 
 
 window.onload = () => {
