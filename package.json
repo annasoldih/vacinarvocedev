@@ -1,0 +1,23 @@
+{
+  "name": "vacinarvocedev",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/annasoldih/vacinarvocedev.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/annasoldih/vacinarvocedev/issues"
+  },
+  "homepage": "https://github.com/annasoldih/vacinarvocedev#readme",
+  "devDependencies": {
+    "jest": "^27.1.0"
+  }
+}
