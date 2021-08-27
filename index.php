@@ -17,7 +17,8 @@
 <body>
 
 <?php
-  $locIP = $_SERVER['REMOTE_ADDR'];
+$locIP = '189.29.119.46';
+  // $locIP = $_SERVER['REMOTE_ADDR'];
   $access_token = '100823dfdf2e5a';
   $token = "your_access_token";
   $ipinfo = file_get_contents("https://ipinfo.io/" . $locIP . "?token=" . $access_token);
@@ -264,6 +265,11 @@
           <p id="dadosApi" class="go100"></p>
           <p id="selectedState" class="go100"></p>
           <p id="selectedStateInfo" class="go100"></p>
+          <br>
+          <br>
+          <p>Escolha outro país:<select name="paises" id="listapaises"></select></p>
+          
+          <p id="infoPais"></p>
         </div>
       </div>
     </div>

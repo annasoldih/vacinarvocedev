@@ -20,6 +20,7 @@ async function getDataStates() {
   });
   return myData;
 }
+const paises = document.getElementById('listapaises');
 
 const allCountries = [];
 async function getDataCountries() {
@@ -27,14 +28,21 @@ async function getDataCountries() {
   const myDados = await fetch(`https://api.covid19api.com/summary`, requestOptions)
   const myInfo = await myDados.json();
   const myCountries = myInfo.Countries;
-  myCountries.forEach(element => {
+  await myCountries.forEach(element => {
+    const pais = document.createElement('option');
     allCountries[element.Country] = {
       cod: element.CountryCode,
       pais: element.Country,
       casos: parseInt(element.TotalConfirmed).toLocaleString(),
       mortes: parseInt(element.TotalDeaths).toLocaleString()
     };
+    pais.value = element.Country;
+    pais.innerText = element.Country;
+    pais.name = 'paises';
+    pais.className = 'optionPais';
+    paises.appendChild(pais);
   });
+
   return allCountries;
 }
 
@@ -45,11 +53,18 @@ async function getGlobal() {
   const myInfo = await myDados.json();
   const myGloball = myInfo.Global;
   myGlobal['Global'] = {
-      casos: parseInt(myGloball.TotalConfirmed).toLocaleString(),
-      mortes: parseInt(myGloball.TotalDeaths).toLocaleString()
-    };
+    casos: parseInt(myGloball.TotalConfirmed).toLocaleString(),
+    mortes: parseInt(myGloball.TotalDeaths).toLocaleString()
+  };
   return myGloball;
 }
+
+const infoPais = document.getElementById('infoPais');
+function getCountry() {
+  let element = paises.value;
+  infoPais.innerText = `${paises.value}: Nesse país, o total de casos confirmados é de ${allCountries[element].casos} e o total de mortes é de ${allCountries[element].mortes}.`;
+}
+paises.addEventListener('change', getCountry);
 
 
 const myIP = document.getElementById('myIP').innerText;
@@ -118,7 +133,6 @@ async function fillData() {
   await getDataStates();
   await getDataCountries();
   await getGlobal();
-
   resp.innerText = loadGeneralData();
   selectedState.innerText = myRegion;
   selectedState.style.display = 'flex';
