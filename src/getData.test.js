@@ -1,9 +1,5 @@
-/**
- * @jest-environment jsdom
- */
-
  const { test, expect } = require('@jest/globals');
- const script = require ('../src/script.js');
+ const script = require ('./getData');
  
  const myData = [];
  const myInfo = [
