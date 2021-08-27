@@ -17,8 +17,7 @@
 <body>
 
 <?php
-  // $locIP = $_SERVER['REMOTE_ADDR'];
-  $locIP = '189.29.119.46';
+  $locIP = $_SERVER['REMOTE_ADDR'];
   $access_token = '100823dfdf2e5a';
   $token = "your_access_token";
   $ipinfo = file_get_contents("https://ipinfo.io/" . $locIP . "?token=" . $access_token);
@@ -33,10 +32,10 @@
   $timezone = $json->timezone;
   ?>
 
-  <span id="myRegion"><?php echo $region; ?></span>
-  <span id="myCountry"><?php echo $country; ?></span>
-  <span id="myCity"><?php echo $city; ?></span>
-  <span id="myIP"><?php echo $locIP; ?></span>
+  <span style="display: none;" id="myRegion"><?php echo $region; ?></span>
+  <span style="display: none;" id="myCountry"><?php echo $country; ?></span>
+  <span style="display: none;" id="myCity"><?php echo $city; ?></span>
+  <span style="display: none;" id="myIP"><?php echo $locIP; ?></span>
 
   <p id="message" class="margin"></p>
   <br>
@@ -269,7 +268,8 @@
       </div>
     </div>
   </main>
-  <script type="module" src="src/script.js"></script>
+  <script src="src/script.js"></script>
+
 </body>
 
 </html>
